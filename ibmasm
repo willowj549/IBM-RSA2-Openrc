@@ -1,0 +1,16 @@
+#!/bin/openrc-run
+name=$RC_SVCNAME
+description="The IBM Remote Supervisor Adapter II interface daemon allows software to interact with the Remote Supervisor Adapter II."
+command="/usr/sbin/ibmasm"
+pidfile="/var/run/$RC_SVCNAME.pid"
+command_args_background=" > /dev/null 2>&1 &"
+
+depend() {
+ provide	ibmusbasm
+ need		localmount logger
+ before		local
+}
+
+start_pre() {
+	mkdir -p /var/lock/subsys
+}
